@@ -22,7 +22,7 @@ export default function FAQ({ faqs }: { faqs: IFaq[] }) {
                 <div className="space-y-4">
                     {faqs.map((faq, index) => (
                         <motion.div
-                            key={faq._id as string}
+                            key={String(faq._id)}
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}

@@ -26,7 +26,7 @@ export default function Sponsors({ sponsors }: { sponsors: ISponsor[] }) {
                         <div className="flex flex-wrap justify-center items-center gap-16">
                             {tiers.Diamond.map((s) => (
                                 <motion.div
-                                    key={s._id as string}
+                                    key={String(s._id)}
                                     initial={{ opacity: 0, scale: 0.9 }}
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     className="p-8 bg-white/5 rounded-3xl backdrop-blur-sm hover:bg-white/10 transition-colors"
@@ -42,7 +42,7 @@ export default function Sponsors({ sponsors }: { sponsors: ISponsor[] }) {
                 <div className="flex flex-wrap justify-center items-center gap-12">
                     {[...tiers.Gold, ...tiers.Silver, ...tiers.Partner].map((s) => (
                         <motion.img
-                            key={s._id as string}
+                            key={String(s._id)}
                             src={s.logoUrl}
                             alt={s.name}
                             initial={{ opacity: 0 }}
