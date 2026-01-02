@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, MapPin, Sparkles } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { IHeroSection } from "@/models/HeroSection";
 import { IEventSettings } from "@/models/EventSettings";
 
@@ -19,10 +20,13 @@ export default function Hero({ data, settings }: HeroProps) {
             {/* Hero Background Image */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-neutral-950/80 z-10" /> {/* Overlay for readability */}
-                <img
+                <Image
                     src={data.backgroundImageUrl || "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"}
                     alt="Hero Background"
-                    className="w-full h-full object-cover opacity-60"
+                    fill
+                    className="object-cover opacity-60"
+                    priority
+                    sizes="100vw"
                 />
             </div>
 
@@ -119,11 +123,16 @@ export default function Hero({ data, settings }: HeroProps) {
                             {/* Glow effect behind logo */}
                             <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/30 to-purple-500/30 rounded-full blur-[100px] animate-pulse" />
 
-                            <motion.img
-                                src={settings.logoUrl || "/logo.png"}
-                                alt="Event Logo"
-                                className="w-full h-full object-contain relative z-10 drop-shadow-2xl"
-                            />
+                            <motion.div className="w-full h-full relative z-10">
+                                <Image
+                                    src={settings.logoUrl || "/logo.png"}
+                                    alt="Event Logo"
+                                    fill
+                                    className="object-contain drop-shadow-2xl"
+                                    sizes="(max-width: 768px) 100vw, 500px"
+                                    priority
+                                />
+                            </motion.div>
                         </motion.div>
                     </div>
                 </div>

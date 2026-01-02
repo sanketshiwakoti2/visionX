@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -10,8 +11,15 @@ export default function Navbar({ logoUrl }: { logoUrl?: string }) {
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
+        let ticking = false;
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    setScrolled(window.scrollY > 50);
+                    ticking = false;
+                });
+                ticking = true;
+            }
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
@@ -29,17 +37,22 @@ export default function Navbar({ logoUrl }: { logoUrl?: string }) {
         <div className="fixed top-0 left-0 w-full z-50 flex justify-center pt-4 px-4 pointer-events-none">
             <nav
                 className={`pointer-events-auto transition-all duration-500 ease-in-out ${scrolled
-                    ? "w-full max-w-5xl rounded-full glass-card py-3 px-6"
+                    ? "w-full max-w-5xl rounded-full glass-card py-3 px-6 backdrop-blur-xl bg-black/40 border border-white/10"
                     : "w-full max-w-7xl py-4 px-6"
                     }`}
             >
                 <div className="flex items-center justify-between">
                     <Link href="/" className="group">
-                        <img
-                            src={logoUrl || "/logo.png"}
-                            alt="MMC VisionX"
-                            className="h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                        />
+                        <div className="relative h-16 md:h-20 w-auto aspect-[3/1]">
+                            <Image
+                                src={logoUrl || "/logo.png"}
+                                alt="MMC VisionX"
+                                fill
+                                className="object-contain object-left transition-transform duration-300 group-hover:scale-105"
+                                sizes="(max-width: 768px) 100vw, 200px"
+                                priority
+                            />
+                        </div>
                     </Link>
 
                     {/* Desktop Nav */}
@@ -77,7 +90,7 @@ export default function Navbar({ logoUrl }: { logoUrl?: string }) {
                             initial={{ opacity: 0, scale: 0.95, y: -20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: -20 }}
-                            className="absolute top-full left-0 right-0 mt-4 p-4 mx-4 glass-card rounded-3xl md:hidden overflow-hidden"
+                            className="absolute backdrop-blur-2xl top-full left-0 right-0 mt-4 p-4 mx-4 bg-neutral-900/95 border border-white/10 rounded-3xl md:hidden overflow-hidden shadow-2xl"
                         >
                             <div className="flex flex-col gap-2">
                                 {navLinks.map((link) => (

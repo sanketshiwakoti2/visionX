@@ -31,7 +31,6 @@ export default function Footer({ settings }: { settings: IEventSettings }) {
                                 <a href={settings.socialLinks?.instagram || "#"} target="_blank" className="bg-white/10 p-3 rounded-full hover:bg-white/20 hover:scale-110 transition-all text-white"><Instagram size={20} /></a>
                                 <a href={settings.socialLinks?.linkedin || "#"} target="_blank" className="bg-white/10 p-3 rounded-full hover:bg-white/20 hover:scale-110 transition-all text-white"><Linkedin size={20} /></a>
                                 <a href={settings.socialLinks?.facebook || "#"} target="_blank" className="bg-white/10 p-3 rounded-full hover:bg-white/20 hover:scale-110 transition-all text-white"><Facebook size={20} /></a>
-                                <a href="https://github.com" target="_blank" className="bg-white/10 p-3 rounded-full hover:bg-white/20 hover:scale-110 transition-all text-white"><Github size={20} /></a>
                             </div>
                         </div>
 

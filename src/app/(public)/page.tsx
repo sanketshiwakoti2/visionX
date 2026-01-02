@@ -16,8 +16,7 @@ import Footer from "@/components/layout/Footer";
 import Prizes from "@/components/sections/Prizes";
 import { getPrizes } from "@/app/actions/prizes";
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 60;
 
 export default async function Home() {
     // Parallel Data Fetching
